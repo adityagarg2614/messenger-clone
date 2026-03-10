@@ -1,0 +1,21 @@
+import prisma from "../libs/prisma";
+import getSession from "./getSession";
+
+export default async function getUsers() {
+    try {
+        const session = await getSession();
+        if (!session?.user?.email) {
+            return [];
+        }
+        const users = await prisma.user.findMany({
+            where: {
+                email: {
+                    not: session.user.email
+                }
+            }
+        })
+        return users;
+    } catch (error: any) {
+        return [];
+    }
+} 
