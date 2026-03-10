@@ -3,7 +3,7 @@ import React from 'react'
 import clsx from 'clsx'
 import Link from 'next/link'
 
-interface DesktopItemProps{
+interface DesktopItemProps {
     label: string;
     icon: any;
     href: string;
@@ -14,27 +14,29 @@ interface DesktopItemProps{
 
 const DesktopItem: React.FC<DesktopItemProps> = ({
     label,
-    icon,
+    icon: Icon,
     href,
     onClick,
     active
 }) => {
 
     const handleClick = () => {
-        if(onClick){
+        if (onClick) {
             return onClick();
         }
     };
 
-  return (
-    <li onClick={handleClick}>
-        <Link href={href}> 
-            <span>
-                {label}
-            </span>
-        </Link>
-    </li>
-  )
+    return (
+        <li onClick={handleClick}>
+            <Link href={href}
+                className={clsx("group flex items-center gap-x-3 rounded-md leading-6 font-semibold text-sm text-gray-500 hover:text-gray-700 p-3 ", active && "bg-gray-100 text-black")}>
+                <Icon className="h-6 w-6 shrink-0" />
+                <span className='sr-only'>
+                    {label}
+                </span>
+            </Link>
+        </li>
+    )
 }
 
 export default DesktopItem
