@@ -10,9 +10,15 @@ const getMessages = async (conversationId: string) => {
             include: {
                 sender: true,
                 seen: true
+            },
+            orderBy: {
+                createdAt: 'asc'
             }
         })
+        return messages;
     } catch (error: any) {
         return []
     }
 }
+
+export default getMessages;
