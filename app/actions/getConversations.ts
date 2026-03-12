@@ -25,7 +25,7 @@ const getConversations = async () => {
                     }
                 }
             }
-        })
+        });
         return conversations;
     } catch (error) {
         console.log(error);
