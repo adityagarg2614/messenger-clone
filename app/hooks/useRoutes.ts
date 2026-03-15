@@ -32,5 +32,5 @@ const useRoutes = () => {
 
     return routes;
 }
-
+//checking if the pathname is equal to /conversations or if there is a conversationId, then the chat route will be active. This allows the chat route to be active even when the user is viewing a specific conversation. The users route will be active only when the pathname is exactly /users. The logout route does not have an active state since it is an action rather than a page.
 export default useRoutes
