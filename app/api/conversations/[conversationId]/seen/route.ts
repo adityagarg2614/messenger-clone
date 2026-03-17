@@ -39,8 +39,9 @@ export async function POST(
         const lastMessage = conversation.messages[conversation.messages.length - 1];
 
         if (!lastMessage) {
-            return new NextResponse("No messages found", { status: 404 });
+            return NextResponse.json(conversation);
         }
+
 
         const updatedMessage = await prisma.message.update({
             where: {
