@@ -18,6 +18,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "dotenv": "^17.3.1",
+    "lodash": "^4.17.23",
     "next": "16.1.6",
     "next-auth": "^4.24.13",
     "next-cloudinary": "^6.17.5",
@@ -35,6 +36,7 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@types/bcrypt": "^6.0.0",
+    "@types/lodash": "^4.17.24",
     "@types/node": "^20.19.37",
     "@types/react": "^19",
     "@types/react-dom": "^19",
