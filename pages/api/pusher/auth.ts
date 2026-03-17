@@ -14,19 +14,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(401).end('Unauthorized');
     }
 
-    const { socket_id, channel_name } = req.body;
-
-    const data = JSON.parse(req.body);
-    const { presence_key } = data;
-
-    const authResponse = pusherServer.authorizeChannel(socket_id, channel_name, {
-        user_id: session.user.email,
-        user_info: {
-            name: session.user.name,
-            email: session.user.email,
-            image: session.user.image,
-        },
-    });
+    const socketId = req.body.socket_id;
+    const channelName = req.body.channel_name;
+    const data = {
+        user_id: session.user.email
+    }
+    const authResponse = pusherServer.authorizeChannel(socketId, channelName, data);
 
     return res.send(authResponse);
 }
