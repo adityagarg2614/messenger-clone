@@ -59,18 +59,26 @@ export async function POST(request: Request) {
             }
         });
         await pusherServer.trigger(conversationId, 'messages:new', newMessage);
+
         const lastMessage = updatedConversation.messages[updatedConversation.messages.length - 1];
 
-        updatedConversation.users.map((user) => {
-            pusherServer.trigger(user.email!, 'conversation:update', {
-                id: conversationId,
+        await Promise.all(updatedConversation.users.map(async (user) => {
+            if (!user.email) {
+                return null;
+            }
+
+            return pusherServer.trigger(user.email, 'conversation:update', {
+                ...updatedConversation,
                 messages: [lastMessage]
-            })
-        })
+            });
+        }));
+
+
 
         return NextResponse.json(newMessage);
 
     } catch (error: any) {
+        console.error('MESSAGES_POST_ERROR:', error);
         return new NextResponse('Internal Error', { status: 500 });
     }
 }
