@@ -52,6 +52,10 @@ const ConversationList: React.FC<ConversationListProps> = ({ initialItems, users
 
         pusherClient.bind('conversation:remove', (conversation: FullConversationType) => {
             setItems((current) => current.filter((m) => m.id !== conversation.id));
+
+            if (conversationId === conversation.id) {
+                router.push('/conversations');
+            }
         })
 
         return () => {
@@ -61,7 +65,7 @@ const ConversationList: React.FC<ConversationListProps> = ({ initialItems, users
             pusherClient.unsubscribe(pusherKey);
         }
 
-    }, [pusherKey])
+    }, [pusherKey, conversationId, router])
 
     return (
         <>
